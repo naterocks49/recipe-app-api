@@ -98,7 +98,9 @@ class PrivateRecipeApiTests(TestCase):
 
     def test_recipe_list_limited_to_user(self):
         """Test list of recipes is limited to authenticated user."""
-        other_user = create_user(email="other@example.com", password="testpass123")
+        other_user = create_user(
+            email="other@example.com",
+            password="testpass123")
         create_recipe(user=other_user)
         create_recipe(user=self.user)
 
@@ -182,7 +184,9 @@ class PrivateRecipeApiTests(TestCase):
 
     def test_update_user_returns_error(self):
         """Test changing the recipe user results in an error."""
-        new_user = create_user(email="user2@example.com", password="testpass123")
+        new_user = create_user(
+            email="user2@example.com",
+            password="testpass123")
         recipe = create_recipe(user=self.user)
 
         payload = {"user": new_user.id}
@@ -426,7 +430,6 @@ class PrivateRecipeApiTests(TestCase):
         self.assertIn(s1.data, res.data)
         self.assertIn(s2.data, res.data)
         self.assertNotIn(s3.data, res.data)
-
 
 
 class ImageUploadTests(TestCase):
